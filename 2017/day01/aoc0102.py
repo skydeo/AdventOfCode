@@ -1,4 +1,4 @@
-testing = 0
+testing = 1
 
 if testing:
     input = ["1212", "1221", "123425", "123123", "12131415"]
@@ -15,7 +15,6 @@ for i in input:
         print("Input: {0}, Length: {1}, Rotate: {2}".format(i, l, rot))
     sum = 0
     for x in range(0,len(i)):
-        # print("Comparing position {0} to position {1}, moduloed = {2}".format(x, x+rot, (x+rot)%l))
         if (i[x] == i[(x+rot)%l]):
             sum += int(i[x])
 
