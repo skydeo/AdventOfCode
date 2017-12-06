@@ -1,4 +1,3 @@
-import copy
 import timeit
 sTime = timeit.default_timer()
 
