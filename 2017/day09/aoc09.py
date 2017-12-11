@@ -1,5 +1,4 @@
 import timeit
-import numpy as np
 sTime = timeit.default_timer()
 
 testing = 0
