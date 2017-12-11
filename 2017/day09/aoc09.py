@@ -5,7 +5,7 @@ sTime = timeit.default_timer()
 testing = 0
 
 if testing:
-    # stream = "{{<a>},{<!a>},{<a>},{<a>}}"
+    # stream = "{{<a>},{<!a>},{<a>},{<aba>}}"
     # stream = "{{{}}}"
     # stream = "{{{!a!b<ab>ab}}}"
     stream = "{{<a!>},{<a!>},{<a!>},{<ab>}}"
@@ -35,8 +35,8 @@ def cleanStream(input):
     
 
 def groupCount(input):
-    pos = 0
     groupScore = 0
+    removedChars = 0
 
     if testing:
         print(input)
@@ -52,6 +52,7 @@ def groupCount(input):
         if char == "<":
             closingSign = input[i+1:].find(">")
             i += closingSign
+            removedChars += closingSign
         elif char == "{":
             ob += 1
         elif char == "}" and ob > 0:
@@ -60,12 +61,12 @@ def groupCount(input):
         
         i += 1
         
-    return groupScore
+    return groupScore, removedChars
 
 stream = cleanStream(stream)
-groupScore = groupCount(stream)
+groupScore, removedChars = groupCount(stream)
 
-print("Group score: {0}".format(groupScore))
+print("Group score: {0}\tRemoved chars: {1}".format(groupScore, removedChars))
 
 
 eTime = timeit.default_timer()
