@@ -22,6 +22,7 @@ if testing:
 # Initialize registers dictionary to 0
 registers = dict.fromkeys(list(instructions[:,0]) + list(instructions[:,4]), 0)
 
+regMax = 0
 for i in instructions:
     l = 'registers[\'' + i[4] + '\'] ' + ' '.join(i[5:])
     if eval(l):
@@ -29,11 +30,14 @@ for i in instructions:
         m += ' += ' if i[1] == 'inc' else ' -= '
         m += i[2]
         exec(m)
+    
+    regMax = max(registers.values()) if max(registers.values()) > regMax else regMax
 
 if testing:
     print("Final registers: {0}".format(registers))
 
 print("Maximum value after instructions: {0}".format(max(registers.values())))
+print("Maximum value during process: {0}".format(regMax))
 
 
 eTime = timeit.default_timer()
