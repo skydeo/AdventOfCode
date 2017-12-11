@@ -17,16 +17,12 @@ with open(filename) as f:
 children = []
 words = []
 for r in data:
-    # print(r)
     if '->' in r:
         for c in r[r.index('->')+1:]:
             children.append(c.strip(','))
         words.append(r[0])
     else:
         children.append(r[0])
-
-# print(children)
-# print(words)
 
 for w in words:
     if w not in children:
