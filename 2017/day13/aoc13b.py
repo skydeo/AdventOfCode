@@ -12,12 +12,12 @@ else:
 f = open(filename, "r")
 firewall = {int(r.split(': ')[0]): int(r.split(': ')[1]) for r in f.read().splitlines()}
 
-def zeroScanner(range, time):
-    return (time % ((range-1)*2)) == 0
+def caught(fw, time):
+    return any([((t+f) % ((fw[f]-1)*2)) == 0 for f in fw])
 
 t = 0
 while(True):
-    if not any([zeroScanner(firewall[f], t + f) for f in firewall]):
+    if not caught(firewall, t):
         print('Clean escape with {0} picosecond delay.'.format(t))
         break
     t += 1
