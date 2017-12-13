@@ -1,5 +1,4 @@
 import timeit
-import itertools
 sTime = timeit.default_timer()
 
 testing = 0
