@@ -1,6 +1,7 @@
 import timeit
 from functools import reduce
-import numpy as np
+import networkx as nx
+
 sTime = timeit.default_timer()
 
 testing = 0
@@ -51,19 +52,51 @@ def knotHash(input):
 
     return hash
 
-# hashList = []
 binHash = []
 for r in range(0,128):
     hexHash = knotHash(input+'-'+str(r))
-    # hashList += [hexHash]
-    # binHash.append([c for c in bin(int(hexHash, 16))[2:].zfill(128)])
-    binHash += ([bin(int(hexHash, 16))[2:].zfill(128)])
-
-usedSqaures = sum(h.count('1') for h in binHash)
-
-print('Input: {0}\t\tUsed Squares: {1}'.format(input,usedSqaures))
+    binHash.append([int(c) for c in bin(int(hexHash, base=16))[2:].zfill(128)])
 
 
+# usedSquares = 0
+# for h in binHash:
+#     for b in h:
+#         if b:
+#             usedSquares += 1
+
+# Here goes nothing...
+G = nx.Graph()
+for row in range(0,128):
+    for column in range(0,128):
+        if binHash[row][column]:
+            G.add_node((row,column))
+
+
+for row in range(0,128):
+    for column in range(0,128):
+        if column > 0:
+            if binHash[row][column] and binHash[row][column-1]:
+                G.add_edge((row, column), (row, column-1))
+        if row > 0:
+            if binHash[row][column] and binHash[row-1][column]:
+                G.add_edge((row, column), (row-1, column))
+
+
+# ## Seen on https://www.reddit.com/r/adventofcode/comments/7jpelc/2017_day_14_solutions/
+# ## Create a 128 x 128 node graph with all connected edges, and delete nodes if they're not in the hash.
+# ## A bit simpler to code, but logically working backwards a bit. Runtimes seem slower, actually.
+
+# G = nx.generators.lattice.grid_2d_graph(128, 128)
+# for row in range(0,128):
+#     for column in range(0,128):
+#         if not binHash[row][column]:
+#             G.remove_node((row, column))
+# ##
+
+usedSquares = nx.number_of_nodes(G)
+numConnected = nx.number_connected_components(G)
+
+print('Input: {0}\nUsed Squares: {1}\nConnected regions: {2}'.format(input, usedSquares, numConnected))
 
 eTime = timeit.default_timer()
 print("Completed in {0} seconds".format(round(eTime - sTime,5)))
