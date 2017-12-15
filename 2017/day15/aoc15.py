@@ -4,7 +4,7 @@ sTime = timeit.default_timer()
 
 testing = 0
 
-part1 = 0
+part1 = 1
 part2 = 1
 
 if testing:
@@ -22,8 +22,7 @@ b_multiple = 8
 
 divisor = 2147483647
 
-values = [(starting_value_a, starting_value_b)]
-binary = []
+values = (starting_value_a, starting_value_b)
 iterations = 5000000
 judge = 0
 
@@ -56,29 +55,29 @@ def generate_binary(int_values):
 
 if part1:
     for i in range(0,iterations):
-        values += [generate_values(values[-1])]
-        binary += [generate_binary(values[-1])]
-        if binary[-1][0] == binary[-1][1]:
+        values = generate_values(values)
+        binary = generate_binary(values)
+        if binary[0] == binary[1]:
             judge += 1
 
     # Remove starting values
     values = values[1:]
 
-    print('The were {0} matches in {1} iterations.'.format(judge, iterations))
+    print('Part 1: The were {0} matches in {1} iterations.'.format(judge, iterations))
 
 if part2:
     for i in range(0,iterations):
         # if (i % 100000) == 0:
             # print('Iteration: {0}'.format(i))
-        values += [generate_values_multiple(values[-1])]
-        binary += [generate_binary(values[-1])]
-        if binary[-1][0] == binary[-1][1]:
+        values = generate_values_multiple(values)
+        binary = generate_binary(values)
+        if binary[0] == binary[1]:
             judge += 1
 
     # Remove starting values
     values = values[1:]
 
-    print('The were {0} matches in {1} iterations.'.format(judge, iterations))
+    print('Part 2: The were {0} matches in {1} iterations.'.format(judge, iterations))
 
 
 eTime = timeit.default_timer()
