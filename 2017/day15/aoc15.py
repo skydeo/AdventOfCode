@@ -23,7 +23,6 @@ b_multiple = 8
 divisor = 2147483647
 
 values = (starting_value_a, starting_value_b)
-iterations = 5000000
 judge = 0
 
 def generate_values(previous_values):
@@ -54,6 +53,8 @@ def generate_binary(int_values):
     return (a, b)
 
 if part1:
+    iterations = 40000000
+    
     for i in range(0,iterations):
         values = generate_values(values)
         binary = generate_binary(values)
@@ -66,6 +67,8 @@ if part1:
     print('Part 1: The were {0} matches in {1} iterations.'.format(judge, iterations))
 
 if part2:
+    iterations = 5000000
+    
     for i in range(0,iterations):
         # if (i % 100000) == 0:
             # print('Iteration: {0}'.format(i))
