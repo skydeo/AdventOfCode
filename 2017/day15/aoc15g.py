@@ -11,13 +11,13 @@ else:
     starting_value_a = 873
     starting_value_b = 583
 
+divisor = 2147483647    
+
 a_factor = 16807
 b_factor = 48271
 
 a_multiple = 4
 b_multiple = 8
-
-divisor = 2147483647
 
 iterations_a = 40000000
 iterations_b = 5000000
@@ -49,7 +49,6 @@ def judge(A, B, i):
     for _ in range(i):
         if next(A) & 0xFFFF == next(B) & 0xFFFF:
             c += 1
-    
     return c
 
 count = judge(a_generator(), b_generator(), iterations_a)
