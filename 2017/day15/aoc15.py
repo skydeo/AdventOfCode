@@ -47,8 +47,8 @@ def generate_values_multiple(previous_values):
     return (a, b)
 
 def generate_binary(int_values):
-    a = bin(int_values[0]).zfill(16)[-16:]
-    b = bin(int_values[1]).zfill(16)[-16:]
+    a = bin(int_values[0] & 0xFFFF)
+    b = bin(int_values[1] & 0xFFFF)
 
     return (a, b)
 
@@ -60,9 +60,6 @@ if part1:
         binary = generate_binary(values)
         if binary[0] == binary[1]:
             judge += 1
-
-    # Remove starting values
-    values = values[1:]
 
     print('Part 1: The were {0} matches in {1} iterations.'.format(judge, iterations))
 
@@ -76,9 +73,6 @@ if part2:
         binary = generate_binary(values)
         if binary[0] == binary[1]:
             judge += 1
-
-    # Remove starting values
-    values = values[1:]
 
     print('Part 2: The were {0} matches in {1} iterations.'.format(judge, iterations))
 
