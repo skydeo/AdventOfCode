@@ -56,7 +56,7 @@ count = judge(a_generator(), b_generator(), iterations_a)
 print('Part 1: The were {0} matches in {1} iterations.'.format(count, iterations_a))
 
 count = judge(a_generator_multiple(), b_generator_multiple(), iterations_b)
-print('Part 2: The were {0} matches in {1} iterations.'.format(judge, iterations_b))
+print('Part 2: The were {0} matches in {1} iterations.'.format(count, iterations_b))
 
 eTime = timeit.default_timer()
 print("Completed in {0} seconds".format(round(eTime - sTime,5)))
